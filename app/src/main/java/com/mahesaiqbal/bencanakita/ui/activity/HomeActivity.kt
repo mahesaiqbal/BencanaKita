@@ -15,7 +15,6 @@ import com.smarteist.autoimageslider.DefaultSliderView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import com.smarteist.autoimageslider.SliderView
 
 
 class HomeActivity : AppCompatActivity() {
