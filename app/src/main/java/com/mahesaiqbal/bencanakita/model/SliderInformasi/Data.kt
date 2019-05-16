@@ -1,4 +1,4 @@
-package com.mahesaiqbal.bencanakita.model
+package com.mahesaiqbal.bencanakita.model.SliderInformasi
 
 data class Data(
     val aktif: String? = null,

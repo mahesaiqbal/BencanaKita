@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mahesaiqbal.bencanakita.R
-import com.mahesaiqbal.bencanakita.model.Years
+import com.mahesaiqbal.bencanakita.model.Years.Years
 import com.mahesaiqbal.bencanakita.ui.adapter.YearsAdapter.YearsViewHolder
 import kotlinx.android.synthetic.main.item_year.view.*
 

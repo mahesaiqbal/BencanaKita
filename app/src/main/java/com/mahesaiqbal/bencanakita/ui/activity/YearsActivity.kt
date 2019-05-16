@@ -1,11 +1,12 @@
 package com.mahesaiqbal.bencanakita.ui.activity
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.mahesaiqbal.bencanakita.R
-import com.mahesaiqbal.bencanakita.model.Years
+import com.mahesaiqbal.bencanakita.model.Years.Years
 import com.mahesaiqbal.bencanakita.ui.adapter.YearsAdapter
 import kotlinx.android.synthetic.main.activity_years.*
 
@@ -38,5 +39,8 @@ class YearsActivity : AppCompatActivity() {
 
     private fun itemClicked(years: Years) {
         Toast.makeText(this, years.year, Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, MonthsActivity::class.java)
+        intent.putExtra("year", years.year)
+        startActivity(intent)
     }
 }

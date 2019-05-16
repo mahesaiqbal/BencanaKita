@@ -8,7 +8,7 @@ import com.smarteist.autoimageslider.IndicatorAnimations
 import kotlinx.android.synthetic.main.activity_home.*
 import android.widget.Toast
 import com.mahesaiqbal.bencanakita.R
-import com.mahesaiqbal.bencanakita.model.Data
+import com.mahesaiqbal.bencanakita.model.SliderInformasi.Data
 import com.mahesaiqbal.bencanakita.network.InstanceRetrofit
 import com.mahesaiqbal.bencanakita.network.Service
 import com.smarteist.autoimageslider.DefaultSliderView

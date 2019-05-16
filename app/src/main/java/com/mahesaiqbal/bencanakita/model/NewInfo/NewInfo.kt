@@ -1,6 +1,6 @@
-package com.mahesaiqbal.bencanakita.model
+package com.mahesaiqbal.bencanakita.model.NewInfo
 
-data class SliderInformasi(
+data class NewInfo(
     val data: List<Data>,
     val error: Boolean,
     val success_msg: String
