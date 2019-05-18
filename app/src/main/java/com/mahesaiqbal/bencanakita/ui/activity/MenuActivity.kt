@@ -36,7 +36,10 @@ class MenuActivity : AppCompatActivity() {
         }
 
         map.setOnClickListener {
-            Toast.makeText(this, "Map", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MapActivity::class.java)
+            intent.putExtra("year", year)
+            intent.putExtra("month", month)
+            startActivity(intent)
         }
     }
 }

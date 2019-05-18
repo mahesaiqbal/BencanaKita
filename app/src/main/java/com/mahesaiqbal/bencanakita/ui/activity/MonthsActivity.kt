@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.mahesaiqbal.bencanakita.R
-import com.mahesaiqbal.bencanakita.model.Months.Months
+import com.mahesaiqbal.bencanakita.model.months.Months
 import com.mahesaiqbal.bencanakita.ui.adapter.MonthsAdapter
 import kotlinx.android.synthetic.main.activity_months.*
 

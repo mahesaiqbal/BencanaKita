@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.mahesaiqbal.bencanakita.R
-import com.mahesaiqbal.bencanakita.model.NewInfo.Data
+import com.mahesaiqbal.bencanakita.model.newinfo.Data
 import com.mahesaiqbal.bencanakita.ui.adapter.NewInfoAdapter.NewInfoViewHolder
 import kotlinx.android.synthetic.main.item_new_info.view.*
 

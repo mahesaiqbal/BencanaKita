@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.mahesaiqbal.bencanakita.R
-import com.mahesaiqbal.bencanakita.model.Years.Years
+import com.mahesaiqbal.bencanakita.model.years.Years
 import com.mahesaiqbal.bencanakita.ui.adapter.YearsAdapter
 import kotlinx.android.synthetic.main.activity_years.*
 
