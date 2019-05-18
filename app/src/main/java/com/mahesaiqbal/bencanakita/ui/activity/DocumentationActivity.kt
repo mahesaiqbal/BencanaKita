@@ -1,0 +1,13 @@
+package com.mahesaiqbal.bencanakita.ui.activity
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.mahesaiqbal.bencanakita.R
+
+class DocumentationActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_documentation)
+    }
+}

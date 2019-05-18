@@ -2,33 +2,35 @@ package com.mahesaiqbal.bencanakita.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import android.widget.Toast
 import com.mahesaiqbal.bencanakita.R
-import com.mahesaiqbal.bencanakita.model.newinfo.Data
+import com.mahesaiqbal.bencanakita.model.video.Data
 import com.mahesaiqbal.bencanakita.network.InstanceRetrofit
 import com.mahesaiqbal.bencanakita.network.Service
-import com.mahesaiqbal.bencanakita.ui.adapter.NewInfoAdapter
+import com.mahesaiqbal.bencanakita.ui.adapter.VideoAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_new_info.*
+import kotlinx.android.synthetic.main.activity_video.*
 
-class NewInfoActivity : AppCompatActivity() {
+
+class VideoActivity : AppCompatActivity() {
 
     lateinit var service: Service
 
-    var newInfo: ArrayList<Data> = arrayListOf()
+    var video: ArrayList<Data> = arrayListOf()
+    var videoIds: ArrayList<String> = arrayListOf()
 
     private lateinit var year: String
     private lateinit var month: String
-    private lateinit var newInfoAdapter: NewInfoAdapter
+    private lateinit var videoAdapter: VideoAdapter
 
     private var compositeDisposable: CompositeDisposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_new_info)
+        setContentView(R.layout.activity_video)
 
         year = intent.getStringExtra("year")
         month = intent.getStringExtra("month")
@@ -41,24 +43,29 @@ class NewInfoActivity : AppCompatActivity() {
 
     private fun initData() {
         compositeDisposable?.add(
-            service.getInformasiBaru(year, month)
+            service.getVideo(year, month)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    newInfo = it.data as ArrayList<Data>
-                    setNewInfoData(newInfo)
+                .observeOn(
+                    AndroidSchedulers.mainThread()
+                ).subscribe({
+                    video = it.data as ArrayList<Data>
+                    setVideoData(video)
                 }, {
-                    Toast.makeText(this, it.localizedMessage, Toast.LENGTH_SHORT).show()
+
                 })
         )
     }
 
-    private fun setNewInfoData(newInfo: ArrayList<Data>) {
-        newInfoAdapter = NewInfoAdapter(this, newInfo)
+    private fun setVideoData(video: ArrayList<Data>) {
+        for (i in video) {
+            videoIds.add(i.link_video.subSequence(32, 43).toString())
+        }
+
+        videoAdapter = VideoAdapter(videoIds, this.lifecycle)
 
         list_data.apply {
-            layoutManager = LinearLayoutManager(this@NewInfoActivity)
-            adapter = newInfoAdapter
+            layoutManager = LinearLayoutManager(this@VideoActivity)
+            adapter = videoAdapter
         }
     }
 

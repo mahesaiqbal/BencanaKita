@@ -1,7 +1,7 @@
 package com.mahesaiqbal.bencanakita.ui.activity
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import com.smarteist.autoimageslider.IndicatorAnimations
@@ -48,14 +48,14 @@ class HomeActivity : AppCompatActivity() {
                     sliderInformasi = it.data as ArrayList<Data>
                     setSliderViews(sliderInformasi)
                 }, {
-                    Toast.makeText(this, it.localizedMessage, Toast.LENGTH_SHORT).show()
+
                 })
         )
     }
 
     private fun setSliderViews(dataSlider: ArrayList<Data>) {
         earthquake_map.setIndicatorAnimation(IndicatorAnimations.THIN_WORM)
-        earthquake_map.scrollTimeInSec = 3
+        earthquake_map.scrollTimeInSec = 5
 
         for (i in 0..dataSlider.size) {
 

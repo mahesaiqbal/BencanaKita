@@ -1,7 +1,7 @@
 package com.mahesaiqbal.bencanakita.ui.activity
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -28,11 +28,17 @@ class MenuActivity : AppCompatActivity() {
         }
 
         documentation.setOnClickListener {
-            Toast.makeText(this, "Documentation", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, DocumentationActivity::class.java)
+            intent.putExtra("year", year)
+            intent.putExtra("month", month)
+            startActivity(intent)
         }
 
         video.setOnClickListener {
-            Toast.makeText(this, "Video", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, VideoActivity::class.java)
+            intent.putExtra("year", year)
+            intent.putExtra("month", month)
+            startActivity(intent)
         }
 
         map.setOnClickListener {

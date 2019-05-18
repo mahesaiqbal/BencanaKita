@@ -1,8 +1,8 @@
 package com.mahesaiqbal.bencanakita.ui.activity
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahesaiqbal.bencanakita.R
 import com.mahesaiqbal.bencanakita.model.map.Data
 import com.mahesaiqbal.bencanakita.network.InstanceRetrofit
@@ -59,6 +59,11 @@ class MapActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@MapActivity)
             adapter = mapAdapter
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
     override fun onDestroy() {
