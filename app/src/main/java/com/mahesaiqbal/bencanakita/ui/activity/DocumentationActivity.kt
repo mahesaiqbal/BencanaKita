@@ -1,5 +1,6 @@
 package com.mahesaiqbal.bencanakita.ui.activity
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -25,6 +26,8 @@ class DocumentationActivity : AppCompatActivity() {
     private lateinit var month: String
     private lateinit var dokumentasiAdapter: DokumentasiAdapter
 
+    private lateinit var progressDialog: ProgressDialog
+
     private var compositeDisposable: CompositeDisposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +44,7 @@ class DocumentationActivity : AppCompatActivity() {
     }
 
     private fun initData() {
+        progressDialog = ProgressDialog.show(this, "Loading", "Loading Data...", true, true)
         compositeDisposable?.add(
             service.getDokumentasi(year, month)
                 .subscribeOn(Schedulers.io())
@@ -49,11 +53,14 @@ class DocumentationActivity : AppCompatActivity() {
                     if (it.error == false) {
                         dokumentasi = it.data as ArrayList<Data>
                         setDokumentasiData(dokumentasi)
+                        progressDialog.dismiss()
                     } else {
                         Toast.makeText(this, "Data tidak tersedia pada tahun ${year} bulan ${month}", Toast.LENGTH_SHORT).show()
+                        progressDialog.dismiss()
                     }
                 }, {
                     Toast.makeText(this, "Data tidak tersedia pada tahun ${year} bulan ${month}", Toast.LENGTH_SHORT).show()
+                    progressDialog.dismiss()
                 })
         )
     }

@@ -66,6 +66,11 @@ class HomeActivity : AppCompatActivity() {
             sliderView.description = dataSlider.get(i).judul
             sliderView.setOnSliderClickListener {
                 Toast.makeText(this, dataSlider.get(i).judul, Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, NewInfoDetailActivity::class.java)
+                intent.putExtra("title", dataSlider.get(i).judul)
+                intent.putExtra("img", "http://sibenta.hessananda.com/assets/img/informasi/${dataSlider.get(i).gambar}")
+                intent.putExtra("desc", dataSlider.get(i).konten)
+                startActivity(intent)
             }
 
             earthquake_map.addSliderView(sliderView)

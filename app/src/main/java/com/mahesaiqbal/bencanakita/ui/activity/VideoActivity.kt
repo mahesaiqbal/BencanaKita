@@ -1,5 +1,6 @@
 package com.mahesaiqbal.bencanakita.ui.activity
 
+import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -27,6 +28,8 @@ class VideoActivity : AppCompatActivity() {
     private lateinit var month: String
     private lateinit var videoAdapter: VideoAdapter
 
+    private lateinit var progressDialog: ProgressDialog
+
     private var compositeDisposable: CompositeDisposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +46,7 @@ class VideoActivity : AppCompatActivity() {
     }
 
     private fun initData() {
+        progressDialog = ProgressDialog.show(this, "Loading", "Loading Data...", true, true)
         compositeDisposable?.add(
             service.getVideo(year, month)
                 .subscribeOn(Schedulers.io())
@@ -51,11 +55,14 @@ class VideoActivity : AppCompatActivity() {
                     if (it.error == false) {
                         video = it.data as ArrayList<Data>
                         setVideoData(video)
+                        progressDialog.dismiss()
                     } else {
                         Toast.makeText(this, "Data tidak tersedia pada tahun ${year} bulan ${month}", Toast.LENGTH_SHORT).show()
+                        progressDialog.dismiss()
                     }
                 }, {
                     Toast.makeText(this, "Data tidak tersedia pada tahun ${year} bulan ${month}", Toast.LENGTH_SHORT).show()
+                    progressDialog.dismiss()
                 }
             )
         )

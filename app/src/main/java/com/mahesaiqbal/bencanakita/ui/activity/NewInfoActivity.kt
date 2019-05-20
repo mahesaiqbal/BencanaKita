@@ -1,5 +1,6 @@
 package com.mahesaiqbal.bencanakita.ui.activity
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +16,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_new_info.*
 
+
+
 class NewInfoActivity : AppCompatActivity() {
 
     lateinit var service: Service
@@ -24,6 +27,8 @@ class NewInfoActivity : AppCompatActivity() {
     private lateinit var year: String
     private lateinit var month: String
     private lateinit var newInfoAdapter: NewInfoAdapter
+
+    private lateinit var progressDialog: ProgressDialog
 
     private var compositeDisposable: CompositeDisposable? = null
 
@@ -41,6 +46,7 @@ class NewInfoActivity : AppCompatActivity() {
     }
 
     private fun initData() {
+        progressDialog = ProgressDialog.show(this, "Loading", "Loading Data...", true, true)
         compositeDisposable?.add(
             service.getInformasiBaru(year, month)
                 .subscribeOn(Schedulers.io())
@@ -49,11 +55,14 @@ class NewInfoActivity : AppCompatActivity() {
                     if (it.error == false) {
                         newInfo = it.data as ArrayList<Data>
                         setNewInfoData(newInfo)
+                        progressDialog.dismiss()
                     } else {
                         Toast.makeText(this, "Data tidak tersedia pada tahun ${year} bulan ${month}", Toast.LENGTH_SHORT).show()
+                        progressDialog.dismiss()
                     }
                 }, {
                     Toast.makeText(this, "Data tidak tersedia pada tahun ${year} bulan ${month}", Toast.LENGTH_SHORT).show()
+                    progressDialog.dismiss()
                 })
         )
     }
