@@ -11,26 +11,27 @@ import com.mahesaiqbal.bencanakita.model.newinfo.Data
 import com.mahesaiqbal.bencanakita.ui.adapter.NewInfoAdapter.NewInfoViewHolder
 import kotlinx.android.synthetic.main.item_new_info.view.*
 
-class NewInfoAdapter(val ctx: Context, private val newInfo: List<Data>) :
+class NewInfoAdapter(val ctx: Context, private val newInfo: List<Data>, val listener: (Data) -> Unit) :
     RecyclerView.Adapter<NewInfoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         NewInfoViewHolder(LayoutInflater.from(ctx).inflate(R.layout.item_new_info, parent, false))
 
     override fun onBindViewHolder(holder: NewInfoViewHolder, position: Int) {
-        holder.bindItem(newInfo[position])
+        holder.bindItem(newInfo[position], listener)
     }
 
     override fun getItemCount(): Int = newInfo.size
 
     class NewInfoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bindItem(data: Data) {
+        fun bindItem(data: Data, listener: (Data) -> Unit) {
             itemView.title_content.text = data.judul
             itemView.detail_content.text = data.konten
             Glide.with(itemView.context)
                 .load("http://sibenta.hessananda.com/assets/img/informasi/${data.gambar}")
                 .into(itemView.img_content)
+            itemView.setOnClickListener { listener(data) }
         }
     }
 }

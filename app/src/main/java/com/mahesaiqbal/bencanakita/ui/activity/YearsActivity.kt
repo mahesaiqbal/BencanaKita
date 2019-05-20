@@ -42,4 +42,11 @@ class YearsActivity : AppCompatActivity() {
         intent.putExtra("year", years.year)
         startActivity(intent)
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(Intent.ACTION_MAIN)
+        intent.addCategory(Intent.CATEGORY_HOME)
+        startActivity(intent)
+    }
 }

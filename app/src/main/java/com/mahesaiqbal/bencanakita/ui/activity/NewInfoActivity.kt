@@ -1,5 +1,6 @@
 package com.mahesaiqbal.bencanakita.ui.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,21 +46,33 @@ class NewInfoActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    newInfo = it.data as ArrayList<Data>
-                    setNewInfoData(newInfo)
+                    if (it.error == false) {
+                        newInfo = it.data as ArrayList<Data>
+                        setNewInfoData(newInfo)
+                    } else {
+                        Toast.makeText(this, "Data tidak tersedia pada tahun ${year} bulan ${month}", Toast.LENGTH_SHORT).show()
+                    }
                 }, {
-                    Toast.makeText(this, it.localizedMessage, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Data tidak tersedia pada tahun ${year} bulan ${month}", Toast.LENGTH_SHORT).show()
                 })
         )
     }
 
     private fun setNewInfoData(newInfo: ArrayList<Data>) {
-        newInfoAdapter = NewInfoAdapter(this, newInfo)
+        newInfoAdapter = NewInfoAdapter(this, newInfo, { data -> itemClicked(data) })
 
         list_data.apply {
             layoutManager = LinearLayoutManager(this@NewInfoActivity)
             adapter = newInfoAdapter
         }
+    }
+
+    private fun itemClicked(data: Data) {
+        val intent = Intent(this, NewInfoDetailActivity::class.java)
+        intent.putExtra("title", data.judul)
+        intent.putExtra("img", "http://sibenta.hessananda.com/assets/img/informasi/${data.gambar}")
+        intent.putExtra("desc", data.konten)
+        startActivity(intent)
     }
 
     override fun onBackPressed() {

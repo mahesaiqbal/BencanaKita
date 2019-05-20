@@ -54,4 +54,9 @@ class MonthsActivity : AppCompatActivity() {
         intent.putExtra("month", months.numberOfMonth)
         startActivity(intent)
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 }

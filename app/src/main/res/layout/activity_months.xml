@@ -22,6 +22,7 @@
                 android:layout_height="wrap_content"
                 android:text="BULAN KEJADIAN BENCANA"
                 android:textColor="@color/black"
+                android:textSize="22sp"
                 android:fontFamily="@font/sourcesanspro_semi_bold"/>
     </LinearLayout>
 
@@ -29,6 +30,7 @@
             android:id="@+id/list_months"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="12dp"
             android:layout_below="@id/title"/>
 
 </RelativeLayout>

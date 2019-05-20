@@ -1,7 +1,9 @@
 package com.mahesaiqbal.bencanakita.ui.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahesaiqbal.bencanakita.R
 import com.mahesaiqbal.bencanakita.model.map.Data
@@ -44,21 +46,33 @@ class MapActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()
                 ).subscribe({
-                    map = it.data as ArrayList<Data>
-                    setMapData(map)
+                    if (it.error == false) {
+                        map = it.data as ArrayList<Data>
+                        setMapData(map)
+                    } else {
+                        Toast.makeText(this, "Data tidak tersedia pada tahun ${year} bulan ${month}", Toast.LENGTH_SHORT).show()
+                    }
                 }, {
-
+                    Toast.makeText(this, "Data tidak tersedia pada tahun ${year} bulan ${month}", Toast.LENGTH_SHORT).show()
                 })
         )
     }
 
     private fun setMapData(map: ArrayList<Data>) {
-        mapAdapter = MapAdapter(this, map)
+        mapAdapter = MapAdapter(this, map, { data -> itemClicked(data) })
 
         list_data.apply {
             layoutManager = LinearLayoutManager(this@MapActivity)
             adapter = mapAdapter
         }
+    }
+
+    private fun itemClicked(data: Data) {
+        val intent = Intent(this, MapDetailActivity::class.java)
+        intent.putExtra("title", data.judul)
+        intent.putExtra("img", "http://sibenta.hessananda.com/assets/img/peta_terdampak/${data.gambar}")
+        intent.putExtra("desc", data.konten)
+        startActivity(intent)
     }
 
     override fun onBackPressed() {

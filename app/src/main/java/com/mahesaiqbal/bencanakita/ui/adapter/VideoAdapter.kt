@@ -36,9 +36,9 @@ class VideoAdapter(private val videoIds: ArrayList<String>, private val lifecycl
         init {
 
             youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-                override fun onReady(initializedYouTubePlayer: YouTubePlayer) {
-                    youTubePlayer = initializedYouTubePlayer
-                    youTubePlayer!!.cueVideo(currentVideoId!!, 0f)
+                override fun onReady(youTubePlayer: YouTubePlayer) {
+                    this@VideoViewHolder.youTubePlayer = youTubePlayer
+                    this@VideoViewHolder.youTubePlayer!!.cueVideo(currentVideoId!!, 0f)
                 }
             })
         }

@@ -1,5 +1,7 @@
 package com.mahesaiqbal.bencanakita.network
 
+import com.mahesaiqbal.bencanakita.model.dokumentasi.Dokumentasi
+import com.mahesaiqbal.bencanakita.model.dokumentasifoto.DokumentasiFoto
 import com.mahesaiqbal.bencanakita.model.map.Map
 import com.mahesaiqbal.bencanakita.model.newinfo.NewInfo
 import com.mahesaiqbal.bencanakita.model.sliderinformasi.SliderInformasi
@@ -20,4 +22,10 @@ interface Service {
 
     @GET("video")
     fun getVideo(@Query("tahun") tahun: String, @Query("bulan") bulan: String): Observable<Video>
+
+    @GET("dokumentasi")
+    fun getDokumentasi(@Query("tahun") tahun: String, @Query("bulan") bulan: String): Observable<Dokumentasi>
+
+    @GET("dokumentasi_foto")
+    fun getDokumentasiFoto(@Query("dokumentasi_id") dokumentasiId: String): Observable<DokumentasiFoto>
 }
