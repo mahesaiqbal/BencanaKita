@@ -1,55 +1,37 @@
 package com.mahesaiqbal.bencanakita.ui.adapter
 
-import androidx.recyclerview.widget.RecyclerView
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.mahesaiqbal.bencanakita.R
+import com.mahesaiqbal.bencanakita.model.video.Data
 import com.mahesaiqbal.bencanakita.ui.adapter.VideoAdapter.VideoViewHolder
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-import androidx.lifecycle.Lifecycle
+import kotlinx.android.synthetic.main.item_video.view.*
 
-
-class VideoAdapter(private val videoIds: ArrayList<String>, private val lifecycle: Lifecycle) :
+class VideoAdapter(val ctx: Context, private val newInfo: List<Data>, val listener: (Data) -> Unit) :
     RecyclerView.Adapter<VideoViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoViewHolder {
-        val youTubePlayerView = LayoutInflater.from(parent.context).inflate(R.layout.item_video, parent, false) as YouTubePlayerView
-        lifecycle.addObserver(youTubePlayerView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        VideoViewHolder(LayoutInflater.from(ctx).inflate(R.layout.item_video, parent, false))
 
-        return VideoViewHolder(youTubePlayerView)
+    override fun onBindViewHolder(holder: VideoViewHolder, position: Int) {
+        holder.bindItem(newInfo[position], listener)
     }
 
-    override fun onBindViewHolder(viewHolder: VideoViewHolder, position: Int) {
-        viewHolder.cueVideo(videoIds[position])
+    override fun getItemCount(): Int = newInfo.size
 
-    }
+    class VideoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    override fun getItemCount(): Int = videoIds.size
-
-    class VideoViewHolder(private val youTubePlayerView: YouTubePlayerView) :
-        RecyclerView.ViewHolder(youTubePlayerView) {
-        private var youTubePlayer: YouTubePlayer? = null
-        private var currentVideoId: String? = null
-
-        init {
-
-            youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-                override fun onReady(youTubePlayer: YouTubePlayer) {
-                    this@VideoViewHolder.youTubePlayer = youTubePlayer
-                    this@VideoViewHolder.youTubePlayer!!.cueVideo(currentVideoId!!, 0f)
-                }
-            })
-        }
-
-        fun cueVideo(videoId: String) {
-            currentVideoId = videoId
-
-            if (youTubePlayer == null)
-                return
-
-            youTubePlayer!!.cueVideo(videoId, 0f)
+        fun bindItem(data: Data, listener: (Data) -> Unit) {
+            itemView.title_content.text = data.judul
+            itemView.detail_content.text = data.judul_gambar
+            Glide.with(itemView.context)
+                .load("http://sibenta.hessananda.com/assets/img/video/${data.gambar}")
+                .into(itemView.img_content)
+            itemView.setOnClickListener { listener(data) }
         }
     }
 }

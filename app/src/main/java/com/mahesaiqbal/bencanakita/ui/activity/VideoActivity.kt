@@ -1,9 +1,9 @@
 package com.mahesaiqbal.bencanakita.ui.activity
 
 import android.app.ProgressDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahesaiqbal.bencanakita.R
@@ -69,16 +69,18 @@ class VideoActivity : AppCompatActivity() {
     }
 
     private fun setVideoData(video: ArrayList<Data>) {
-        for (i in video) {
-            videoIds.add(i.link_video.subSequence(32, 43).toString())
-        }
-
-        videoAdapter = VideoAdapter(videoIds, this.lifecycle)
+        videoAdapter = VideoAdapter(this, video, { data -> itemClicked(data) })
 
         list_data.apply {
             layoutManager = LinearLayoutManager(this@VideoActivity)
             adapter = videoAdapter
         }
+    }
+
+    private fun itemClicked(data: Data) {
+        val intent = Intent(this, VideoDetailActivity::class.java)
+        intent.putExtra("link_video", data.link_video)
+        startActivity(intent)
     }
 
     override fun onBackPressed() {

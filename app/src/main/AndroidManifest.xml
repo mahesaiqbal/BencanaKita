@@ -12,6 +12,8 @@
             android:roundIcon="@drawable/logo"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".ui.activity.VideoDetailActivity">
+        </activity>
         <activity android:name=".ui.activity.MapDetailActivity">
         </activity>
         <activity android:name=".ui.activity.NewInfoDetailActivity">
