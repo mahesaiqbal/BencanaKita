@@ -9,5 +9,6 @@ data class Data(
     val judul: String,
     val judul_gambar: String,
     val konten: String,
-    val user_id: String
+    val user_id: String,
+    val file_pdf: String? = null
 )

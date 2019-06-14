@@ -79,7 +79,8 @@ class NewInfoActivity : AppCompatActivity() {
     private fun itemClicked(data: Data) {
         val intent = Intent(this, NewInfoDetailActivity::class.java)
         intent.putExtra("title", data.judul)
-        intent.putExtra("img", "http://sibenta.hessananda.com/assets/img/informasi/${data.gambar}")
+        intent.putExtra("pdf", data.file_pdf)
+        intent.putExtra("url_pdf", "http://sibenta.hessananda.com/assets/img/informasi_pdf/${data.file_pdf}")
         intent.putExtra("desc", data.konten)
         startActivity(intent)
     }

@@ -15,6 +15,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_marginBottom="28dp"
                 android:background="@color/cold">
 
             <TextView
@@ -33,9 +34,8 @@
         <ImageView
                 android:id="@+id/img_content"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/earthquake"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_pdf"
                 android:layout_below="@id/title"/>
 
         <LinearLayout
@@ -43,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@color/white"
+                android:layout_marginTop="28dp"
                 android:layout_below="@id/img_content">
 
             <TextView

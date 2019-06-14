@@ -26,11 +26,7 @@ class NewInfoAdapter(val ctx: Context, private val newInfo: List<Data>, val list
     class NewInfoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun bindItem(data: Data, listener: (Data) -> Unit) {
-            itemView.title_content.text = data.judul
-            itemView.detail_content.text = data.konten
-            Glide.with(itemView.context)
-                .load("http://sibenta.hessananda.com/assets/img/informasi/${data.gambar}")
-                .into(itemView.img_content)
+            itemView.title.text = data.judul
             itemView.setOnClickListener { listener(data) }
         }
     }
